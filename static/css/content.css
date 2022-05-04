@@ -1,0 +1,8 @@
+.content {
+    grid-area: content;
+    margin: 12px;
+}
+
+.content table {
+    margin: auto;
+}

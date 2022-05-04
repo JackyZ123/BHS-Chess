@@ -1,4 +1,35 @@
 {% extends 'layout.html' %}
 {% block content %}
 
+<div class="content">
+    <link rel="stylesheet" href="/static/css/content.css">
+
+    <!-- leaderboard table -->
+    <div>
+        <table>
+            <tbody>
+                <!-- header -->
+                <tr>
+                    <th style="width: 50px;">Score</th>
+                    <th style="width: 100px;">Name</th>
+                    <th style="width: 50px;">White Winrate</th>
+                    <th style="width: 50px; padding: 10px;">Black Winrate</th>
+                    <th style="width: 50px;">Overall Winrate</th>
+                </tr>
+
+                <!-- rows of player information -->
+                {% for i in players %}
+                <tr>
+                    <td>{{i[0]}}</td>
+                    <td>{{i[1]}}</td>
+                    <td style="text-align: right;">{{i[2]}}%</td>
+                    <td style="text-align: right;">{{i[3]}}%</td>
+                    <td style="text-align: right;">{{i[4]}}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
 {% endblock %}

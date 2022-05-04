@@ -1,14 +1,12 @@
-.top-header{
+.header {
     grid-area: header;
-    justify-self: stretch;
     background-color: #1f1f20;
-    position: fixed;
     margin: 0;
     color: #dddddd;
     z-index: inherit;
 }
 
-.top-header h1{
+.header h1 {
     display: inline-block;
     margin: 5px;
     color: #ffcf75;
@@ -18,7 +16,7 @@
     z-index: inherit;
 }
 
-.top-header p{
+.header p {
     float: right;
     text-align: right;
     margin: 25px;
