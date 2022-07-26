@@ -10,11 +10,11 @@
             <tbody>
                 <!-- header -->
                 <tr>
-                    <th style="width: 50px;">Score</th>
-                    <th style="width: 100px;">Name</th>
-                    <th style="width: 50px;">White Winrate</th>
-                    <th style="width: 50px; padding: 10px;">Black Winrate</th>
-                    <th style="width: 50px;">Overall Winrate</th>
+                    <th style="width: 5vw;">Score</th>
+                    <th style="width: 15vw;">Name</th>
+                    <th style="width: 5vw;">White Winrate</th>
+                    <th style="width: 5vw; padding: 5px;">Black Winrate</th>
+                    <th style="width: 5vw;">Overall Winrate</th>
                 </tr>
 
                 <!-- rows of player information -->
@@ -22,9 +22,9 @@
                 <tr>
                     <td>{{i[0]}}</td>
                     <td>{{i[1]}}</td>
-                    <td style="text-align: right;">{{i[2]}}%</td>
                     <td style="text-align: right;">{{i[3]}}%</td>
                     <td style="text-align: right;">{{i[4]}}%</td>
+                    <td style="text-align: right;">{{i[2]}}%</td>
                 </tr>
                 {% endfor %}
             </tbody>

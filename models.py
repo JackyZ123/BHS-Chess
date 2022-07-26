@@ -1,4 +1,5 @@
-from main import db
+from app import db
+
 
 UserMatch = db.Table('UserMatch',
                      db.Column('uid', db.Integer, db.ForeignKey('User.id')),
@@ -34,7 +35,7 @@ class Match(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date)
     white = db.Column(db.Integer)
-    white_won = db.Column(db.Boolean)
+    white_won = db.Column(db.Float)
 
     users = db.relationship('User', secondary=UserMatch, back_populates='matches')
 
