@@ -1,23 +1,21 @@
 {% extends 'layout.html' %}
 {% block content %}
 
+<div>
+    <h3>SignUp</h3>
 
-<div style="margin-left: auto; margin-right: auto; width: fit-content;">
-    <h3>Login</h3>
-
-    <form action="/login" method="post">
+    <form action="/signup" method="post">
         <h5>Username</h5>
         <input type="text" name="username">
         <br>
         <h5>Password</h5>
         <input type="password" name="password">
         <br>
+        <h5>Confirm Password</h5>
+        <input type="password" name="password confirm">
         <br>
         <input type="submit">
     </form>
-    <br>
-
-    <a href="/signup">or create account</a>
 </div>
 
 

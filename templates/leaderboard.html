@@ -1,35 +1,32 @@
 {% extends 'layout.html' %}
 {% block content %}
 
-<div class="content">
-    <link rel="stylesheet" href="/static/css/content.css">
+<!-- leaderboard table -->
+<div>
+    <table>
+        <tbody>
+            <!-- header row -->
+            <tr>
+                <th style="width: 5vw;">Score</th>
+                <th style="width: 15vw;">Name</th>
+                <th style="width: 5vw;">White Winrate</th>
+                <th style="width: 5vw; padding: 5px;">Black Winrate</th>
+                <th style="width: 5vw;">Overall Winrate</th>
+            </tr>
 
-    <!-- leaderboard table -->
-    <div>
-        <table>
-            <tbody>
-                <!-- header -->
-                <tr>
-                    <th style="width: 5vw;">Score</th>
-                    <th style="width: 15vw;">Name</th>
-                    <th style="width: 5vw;">White Winrate</th>
-                    <th style="width: 5vw; padding: 5px;">Black Winrate</th>
-                    <th style="width: 5vw;">Overall Winrate</th>
-                </tr>
-
-                <!-- rows of player information -->
-                {% for i in players %}
-                <tr>
-                    <td>{{i[0]}}</td>
-                    <td>{{i[1]}}</td>
-                    <td style="text-align: right;">{{i[3]}}%</td>
-                    <td style="text-align: right;">{{i[4]}}%</td>
-                    <td style="text-align: right;">{{i[2]}}%</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+            <!-- rows of player information -->
+            {% for i in players %}
+            <tr>
+                <td>{{i[0]}}</td>
+                <td>{{i[1]}}</td>
+                <td style="text-align: right;">{{i[3]}}%</td>
+                <td style="text-align: right;">{{i[4]}}%</td>
+                <td style="text-align: right;">{{i[2]}}%</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
+
 
 {% endblock %}

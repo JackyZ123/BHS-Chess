@@ -16,7 +16,7 @@
     z-index: inherit;
 }
 
-.header p {
+.header div {
     float: right;
     text-align: right;
     margin: 25px;

@@ -7,3 +7,22 @@ body {
         "header header"
         "side-nav content";
 }
+
+.error{
+    /* background-color: red; */
+    width: 95%;
+    height: auto;
+}
+
+.error textarea{
+    resize: none;
+    /* padding: 10px; */
+    width: 100%;
+    border: none;
+    margin: 0;
+    background-color: red;
+}
+
+.error textarea:focus {
+    outline: none;
+}

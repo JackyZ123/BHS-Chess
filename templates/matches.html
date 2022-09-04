@@ -1,43 +1,39 @@
 {% extends 'layout.html' %}
 {% block content %}
 
-<div class="content">
-    <link rel="stylesheet" href="/static/css/content.css">
+<!-- leaderboard table -->
+<div>
+    <table>
+        <tbody>
+            <!-- header -->
+            <tr>
+                <th style="width: 30%;">White</th>
+                <th style="width: 10%"></th>
+                <th style="width: 30%;">Black</th>
+                <th style="width: 30%;">Winner</th>
+            </tr>
 
-    <!-- leaderboard table -->
-    <div>
-        <table>
-            <tbody>
-                <!-- header -->
-                <tr>
-                    <th style="width: 30%;">White</th>
-                    <th style="width: 10%"></th>
-                    <th style="width: 30%;">Black</th>
-                    <th style="width: 30%;">Winner</th>
-                </tr>
-
-                <!-- rows of matches information -->
-                {% for i in matches %}
-                {% set day = i.pop(1) %}
-                <tr>
-                    <td>{{i[0]}}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                {% for match in day %}
-                <tr>
-                    <!-- individual matches -->
-                    <td>{{match[0]}}</td>
-                    <td>vs</td>
-                    <td>{{match[1]}}</td>
-                    <td>{{match[2]}}</td>
-                </tr>
-                {% endfor %}
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+            <!-- rows of matches information -->
+            {% for i in matches %}
+            {% set day = i.pop(1) %}
+            <tr>
+                <td>{{i[0]}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            {% for match in day %}
+            <tr>
+                <!-- individual matches -->
+                <td>{{match[0]}}</td>
+                <td>vs</td>
+                <td>{{match[1]}}</td>
+                <td>{{match[2]}}</td>
+            </tr>
+            {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 
 {% endblock %}

@@ -9,12 +9,14 @@ UserMatch = db.Table('UserMatch',
 class User(db.Model):
     __tablename__ = "User"
 
+    # user stuff
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    email = db.Column(db.String(80))
-    password = db.Column(db.String(80))
+    password = db.Column(db.String())
+    salt = db.Column(db.String())
     is_admin = db.Column(db.Boolean)
 
+    # elo stuff
     score = db.Column(db.Integer)
     num_white_win = db.Column(db.Integer)
     num_white_loss = db.Column(db.Integer)
