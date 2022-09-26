@@ -2,10 +2,11 @@
     <link rel="stylesheet" href="../static/css/header.css">
     <!-- logo -->
     <!-- <img src="/static/images/circle.png" alt="CIRCLE" class="logo"> -->
-    <h1>Chess Club</h1>
+    <div style="margin: 0; margin-left: 350px; float: left;">
+        <h1>Chess Club</h1>
+    </div>
     <div>
         <p id="user" style="margin: 0;">User: Guest</p>
-        <br>
         <a href="/login" id="login link">Login</a>
         <a href="/logout" id="logout link">Logout</a>
     </div>
@@ -13,6 +14,7 @@
 </div>
 
 <script>
+    // create request
     if (window.XMLHttpRequest) {
         var req = new XMLHttpRequest();
     }
@@ -23,16 +25,18 @@
     req.open("POST", "/get_user", true);
     req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     req.onreadystatechange = function () {
-        // when information is returned, put it into a datalist
+        // process user
         if (this.readyState == 4 && this.status == 200) {
             var response = this.responseText;
             var userText = document.getElementById("user");
             if (response == ""){
+                // no user
                 userText.textContent = "Not Signed In"
                 document.getElementById("logout link").setAttribute("style","display: none;");
                 return;
             }
             else{
+                // yes user
                 userText.textContent = "User: " + response;
                 document.getElementById("login link").setAttribute("style","display: none;");
             }

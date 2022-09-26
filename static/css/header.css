@@ -1,9 +1,16 @@
 .header {
     grid-area: header;
-    background-color: #1f1f20;
+    /* background-color: #1f1f20; */
     margin: 0;
     color: #dddddd;
     z-index: inherit;
+
+    background-image: url("../images/bhsbanner.png");
+    aspect-ratio: 1;
+    width: 100vw;
+    height: 20vh;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .header h1 {
@@ -11,7 +18,7 @@
     margin: 5px;
     color: #ffcf75;
     padding: 8px;
-    font-family: 'Brush Script MT', cursive;
+    font-family: Arial, sans-serif;
     font-size: 50px;
     z-index: inherit;
 }
