@@ -11,7 +11,9 @@
                 <th>White Player</th>
                 <th>Black Player</th>
                 <th>White Won</th>
+                {% if has_user %}
                 <th></th>
+                {% endif %}
             </tr>
             <tr>
                 <!-- white input -->
@@ -42,7 +44,9 @@
                         <option value="0.5">Draw</option>
                     </select>
                 </td>
+                {% if has_user %}
                 <td><input type="submit" value="Submit" onclick="submit()"></td>
+                {% endif %}
             </tr>
         </tbody>
     </table>
@@ -80,7 +84,7 @@
         // check if they typed anything in
         if (input.value == "")
             return;
-        console.log(document.getElementById(caller + " drop").childElementCount);
+        // console.log(document.getElementById(caller + " drop").childElementCount);
         if (datalist.childElementCount > 0) {
             input.value = datalist.firstChild.value;
             if (caller == 'white')
@@ -128,7 +132,7 @@
             }
         };
 
-        console.log(val);
+        // console.log(val);
 
         req.send("data=" + val);
 
@@ -181,6 +185,8 @@
         };
 
         var winner = document.getElementById("winner").value;
+
+        // console.log(white,black);
 
         req.send("white=" + white + "&black=" + black + "&winner=" + winner);
     }

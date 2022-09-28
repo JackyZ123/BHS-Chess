@@ -1,6 +1,7 @@
 """Chess Site for Chess Club"""
 
 from datetime import datetime
+from ssl import SSL_ERROR_SSL
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, redirect, request, session
 from random import choice
@@ -38,8 +39,9 @@ def generate_salt(size=16):
 def get_error():
     """returns the error that occured or nothing if no error"""
     if 'error' in session:
-        txt = session['error']
+        errors = session['error']
         del session['error']
+        txt = " - " + "\n - ".join(errors)
         return txt
     else:
         return ''
@@ -47,10 +49,10 @@ def get_error():
 
 def set_error(txt=''):
     """sets a current error"""
-    if 'error' in session:
-        session['error'] += "\n - " + txt
+    if 'error' in session and txt not in session['error']:
+        session['error'].append(txt)
     else:
-        session['error'] = " - " + txt
+        session['error'] = [txt]
 
 
 def winrate(user):
@@ -202,7 +204,7 @@ def matches():
 
         winner = "Draw"
 
-        # get the white and black user
+        # get the white and black player
         if match[2] == match[1][0][0]:
             white = match[1][0][1]
             black = match[1][1][1]
@@ -257,27 +259,33 @@ def new_match():
     """add new match to database"""
 
     if request.method == "POST":
+        if get_current_user() is None:
+            set_error("you muct be logged in to use this feature")
+            return redirect("/new_match")
+
         white, black, winner = \
             [request.form.get("white"), request.form.get("black"), request.form.get("winner")]
 
-        white = User.query.filter_by(name=white).all()
-        black = User.query.filter_by(name=black).all()
+        white = User.query.filter_by(id=white).first() # popup error if player does not exist
+        black = User.query.filter_by(id=black).first()
 
         # check if players and winner exists
-        if len(white) == 0:
+        if white is None:
             set_error("white player does not exist")
-        if len(black) == 0:
+        if black is None:
             set_error("black player does not exist")
 
-        winner = float(winner)
+        if 'error' in session:
+            return "" # if there is an error return back to the page
+
+        winner = float(winner) # winner is 0 for black, 1 for white and 0.5 for draw
         if winner == -1:
             set_error("no winner")
 
-        if 'error' in session:
-            return ""
-
-        if white.id == black.id:
+        if white == black:
             set_error("same person")
+        
+        if 'error' in session:
             return ""
 
         # create match
@@ -297,11 +305,15 @@ def new_match():
 
         return redirect("/matches")
     else:
-         # get all players that can be put into a match
+        # get all players that can be put into a match
         players = [user.name for user in User.query.all()]
         players.sort()
 
-        return render_template("add_match.html", title="Add Match", players=players)
+        if get_current_user() is None:
+            set_error("you must be logged in to use this feature")
+            return render_template("add_match.html", title="Add Match", players=players, has_user=False)
+
+        return render_template("add_match.html", title="Add Match", players=players, has_user=True)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -327,6 +339,19 @@ def signup():
         username = request.form.get("username")
         password = request.form.get("password")
         confirm_password = request.form.get("password confirm")
+        if len(User.query.filter_by(name=username).all()) > 0:
+            set_error("username already exists")
+            return redirect("/signup")
+        if username == "":
+            set_error("username cannot be empty")
+        elif username in ["Draw"]:
+            set_error("username is invalid=")
+        elif len(username) > 30:
+            set_error("username is too long. please keep username 30 characters or less")
+        if password == "":
+            set_error("password cannot be empty")
+        if "error" in session:
+            return redirect("/signup")
         if password != confirm_password:
             set_error("passwords do not match")
             return redirect("/signup")
@@ -369,5 +394,17 @@ def logout():
         return redirect("/")
 
 
+@app.errorhandler(404)
+def page_not_found_error(e):
+    # note that we set the 404 status explicitly
+    return render_template('404.html'), 404
+
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    # note that we set the 404 status explicitly
+    return render_template('500.html'), 500
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

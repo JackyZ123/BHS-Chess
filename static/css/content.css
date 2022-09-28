@@ -5,4 +5,69 @@
 
 .content table {
     margin: auto;
+
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    background-color: rgb(233, 233, 233);
+    color: rgb(19, 19, 19);
+    margin-bottom: 10px;
+    z-index: inherit;
+    font-size: max(1.5vw,10px);
+}
+
+.content td{
+    padding-left: 10px;
+    padding-right: 10px;
+    z-index: inherit;
+
+}
+
+.content tr{
+    overflow: hidden;
+}
+
+.content th, .dateHead{
+    background: #51b250;
+    position: sticky;
+    color: black;
+    padding: 5px;
+    z-index: inherit;
+}
+
+.content th{
+    top: 9vw;
+}
+
+.dateHead{
+    top: calc(9vw + max(2.2vw, 18px));
+}
+
+.content tr:nth-child(even), .matches tr:nth-child(even){
+    background-color: rgb(197, 197, 197);
+}
+
+.dateHead td{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-style: oblique;
+}
+
+.page-error{
+    width: 100%;
+    height: 100%;
+}
+
+.page-error h1{
+    text-align: center;
+}
+
+.page-error p, .page-error a{
+    width: 90%;
+    margin-left: 5%;
+}
+
+.page-error a{
+    color: black;
 }

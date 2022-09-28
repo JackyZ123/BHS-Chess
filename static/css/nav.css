@@ -1,0 +1,36 @@
+.side-nav {
+    /* keep to top */
+    position: sticky;
+    top: 0;
+    grid-area: side-nav;
+    margin: 0;
+    color: #dddddd;
+    z-index: inherit;
+
+    /* set BHS logo left side as background */
+    background-image: url("../images/bhsbanner-left.png");
+    aspect-ratio: 1;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #005747;
+    height: 100vh;
+    width: 100%;
+}
+
+.links {
+    margin-top: 16vw;
+    font-size: max(1.5vw, 8px);
+}
+
+.links a{
+    color: white;
+    text-decoration: none;
+}
+
+.links a:link, .links a:visited{
+    color: white;
+}
+
+.links a:hover{
+    color: rgb(205, 205, 205);
+}

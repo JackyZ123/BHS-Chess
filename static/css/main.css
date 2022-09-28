@@ -1,10 +1,11 @@
 body {
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
     display: grid;
     grid-template-columns: 20vw auto;
-    grid-template-rows: 12vh auto;
+    grid-template-rows: 9vw auto;
     grid-template-areas:
-        "header header"
+        "side-nav header"
         "side-nav content";
 }
 

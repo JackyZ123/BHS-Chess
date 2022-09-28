@@ -4,7 +4,6 @@
 <!-- leaderboard table -->
 <div>
     <table>
-        <tbody>
             <!-- header -->
             <tr>
                 <th style="width: 30%;">White</th>
@@ -16,7 +15,7 @@
             <!-- rows of matches information -->
             {% for i in matches %}
             {% set day = i.pop(1) %}
-            <tr>
+            <tr class="dateHead" style="background-color: #005747; color: white;">
                 <td>{{i[0]}}</td>
                 <td></td>
                 <td></td>

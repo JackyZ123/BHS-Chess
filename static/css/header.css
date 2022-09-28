@@ -1,31 +1,46 @@
 .header {
+    /* keep at top */
+    position: sticky;
+    top: 0;
     grid-area: header;
-    /* background-color: #1f1f20; */
+
     margin: 0;
     color: #dddddd;
     z-index: inherit;
 
-    background-image: url("../images/bhsbanner.png");
+    /* set right half of BHS logo */
+    background-image: url("../images/bhsbanner-right.png");
     aspect-ratio: 1;
-    width: 100vw;
-    height: 20vh;
+    height: 100%;
+    width: 100%;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: 12.2vw;
+
+    background-color: white;
+}
+
+.title {
+    float: left;
+    margin: 0;
+    margin-left: 10vw;
+    margin-top: 1vw;
 }
 
 .header h1 {
     display: inline-block;
-    margin: 5px;
-    color: #ffcf75;
-    padding: 8px;
+    margin: 0;
+    color: black;
+    padding: 0;
     font-family: Arial, sans-serif;
-    font-size: 50px;
+    font-size: 4vw;
     z-index: inherit;
 }
 
-.header div {
+.header .login {
+    color: black;
     float: right;
     text-align: right;
-    margin: 25px;
+    margin: 2vw;
     z-index: inherit;
+    font-size: max(1.5vw, 8px);
 }
