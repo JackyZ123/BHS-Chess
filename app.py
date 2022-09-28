@@ -1,7 +1,6 @@
 """Chess Site for Chess Club"""
 
 from datetime import datetime
-from ssl import SSL_ERROR_SSL
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, redirect, request, session
 from random import choice
@@ -166,6 +165,7 @@ def sort_by_date(match):
 
 @app.route("/")
 def main():
+    """takes user to main page"""
     return redirect("/leaderboard")
 
 
@@ -190,7 +190,7 @@ def matches():
     match_list = Match.query.all()
     match_list = [[match.date.strftime("%d-%m-%Y"),
                    [[user.id, user.name] for user in match.users],
-                   match.white, match.white_won] for match in match_list]
+                   match.white, match.white_won] for match in match_list] 
     match_list.sort(key=sort_by_date)
 
     if len(match_list) == 0:
@@ -318,6 +318,7 @@ def new_match():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    """login page and login method which checks if the user provided the correct details to login"""
     if request.method == "POST":
         username, password = [request.form.get("username"), request.form.get("password")]
         user = User.query.filter_by(name=username).all()
@@ -335,13 +336,18 @@ def login():
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
+    """signup page and signup method which takes in a username and a password along 
+    with a test check password"""
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
         confirm_password = request.form.get("password confirm")
-        if len(User.query.filter_by(name=username).all()) > 0:
-            set_error("username already exists")
-            return redirect("/signup")
+
+        for user in User.query.all():
+            if username.lower() == user.name.lower():
+                set_error("username already exists")
+                return redirect("/signup")
+
         if username == "":
             set_error("username cannot be empty")
         elif username in ["Draw"]:
@@ -386,6 +392,7 @@ def signup():
 
 @app.route("/logout", methods=["GET"])
 def logout():
+    """logout user"""
     if "userid" in session:
         del session["userid"]
         return redirect("/")
@@ -396,15 +403,17 @@ def logout():
 
 @app.errorhandler(404)
 def page_not_found_error(e):
+    """page not found page"""
     # note that we set the 404 status explicitly
     return render_template('404.html'), 404
 
 
 @app.errorhandler(500)
 def internal_server_error(e):
-    # note that we set the 404 status explicitly
+    """internal server error page"""
+    # note that we set the 500 status explicitly
     return render_template('500.html'), 500
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
